@@ -1,0 +1,25 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environment (if created inside project)
+venv/
+.env
+
+# Pipenv environment files
+Pipfile
+Pipfile.lock
+
+# Django-related ignores
+db.sqlite3
+/media/
+staticfiles/
+*.log
+
+# VS Code and JetBrains IDEs
+.vscode/
+.idea/
+
+# Migrations (optional: ignore if auto-generated)
+**/migrations/*.py
+!**/migrations/__init__.py
