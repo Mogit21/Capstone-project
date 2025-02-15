@@ -24,6 +24,7 @@ router.register(r'booking', BookingViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('restaurant.urls')),
     path('restaurant/', include('restaurant.urls')),
     path('restaurant/', include(router.urls)),
     path('auth/', include('djoser.urls')),
