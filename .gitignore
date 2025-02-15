@@ -7,7 +7,6 @@ venv/
 .env
 
 # Pipenv environment files
-Pipfile
 Pipfile.lock
 
 # Django-related ignores
