@@ -19,7 +19,7 @@ class MenuViewTest(TestCase):
 
     def test_get_all_menus(self):
         """Test retrieving all menu items via API"""
-        response = self.client.get("/api/menu/")
+        response = self.client.get("/restaurant/menu/")
         menus = Menu.objects.all()
         serializer = MenuSerializer(menus, many=True)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -27,19 +27,19 @@ class MenuViewTest(TestCase):
 
     def test_create_menu_valid(self):
         """Test creating a new menu item with valid data"""
-        response = self.client.post("/api/menu/", data=self.valid_payload, format="json")
+        response = self.client.post("/restaurant/menu/", data=self.valid_payload, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Menu.objects.count(), 4)  # Three initial + one new
 
     def test_create_menu_invalid(self):
         """Test creating a menu item with invalid data"""
-        response = self.client.post("/api/menu/", data=self.invalid_payload, format="json")
+        response = self.client.post("/restaurant/menu/", data=self.invalid_payload, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_update_menu(self):
         """Test updating an existing menu item"""
         update_data = {"title": "Vegan Pizza", "price": 10.99, "inventory": 25}
-        response = self.client.put(f"/api/menu/{self.item2.id}/", data=update_data, format="json")
+        response = self.client.put(f"/restarant/menu/{self.item2.id}/", data=update_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.item2.refresh_from_db()
         self.assertEqual(self.item2.title, "Vegan Pizza")
@@ -48,6 +48,6 @@ class MenuViewTest(TestCase):
 
     def test_delete_menu(self):
         """Test deleting a menu item"""
-        response = self.client.delete(f"/api/menu/{self.item1.id}/")
+        response = self.client.delete(f"/restarant/menu/{self.item1.id}/")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Menu.objects.count(), 2)  # One less after deletion
